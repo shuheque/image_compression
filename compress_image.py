@@ -1,5 +1,6 @@
 from PIL import Image
 import os
+import sys
 
 
 def img_file(image_location):
@@ -29,7 +30,14 @@ def compress(max_size, file_location):
 
 
 def main():
-    compress(200000, "blog_fast-01.jpg")
+    max_size = int(sys.argv[1])
+    files = sys.argv[2:]
+    for file_loc in files:
+        print("%s will be compressed to %s" % (file_loc,
+            get_compressed_file_name(file_loc)))
+        compress(max_size, file_loc)
+    print("All file compressed.")
+
 
 
 if __name__ == '__main__':
