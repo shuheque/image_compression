@@ -2,6 +2,8 @@ from PIL import Image
 import os
 
 
+import time
+
 def img_file(image_location):
     try:
         image = Image.open(image_location)
@@ -11,18 +13,15 @@ def img_file(image_location):
         return (None, 0)
 
 
-def compress(original_image_file_location):
+def compress(file_location):
     compressed_img_file_loc = "compressed_img.jpg"
-    image, size = img_file(compressed_img_file_loc)
+    image, size = img_file(file_location)
+    image.save(compressed_img_file_loc,optimize=True,quality=85)
     if size > 200000:
-        image.save(compressed_img_file_loc,optimize=True,quality=95)
         compress(compressed_img_file_loc)
-    else:
-        image = Image.open(original_image_file_location)
-        image.save(compressed_img_file_loc,optimize=True,quality=95)
 
 
-def make():
+def main():
     compress("blog_fast-01.jpg")
 
 if __name__ == '__main__':
