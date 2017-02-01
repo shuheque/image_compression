@@ -16,7 +16,9 @@ def get_compressed_file_name(file_location):
     if "compressed" in file_location:
         return file_location
     else:
-        compressed_file_name = "%s%s" % (file_location.replace(".jpg", ""),
+        strip_extension = file_location.replace(".jpg", "")
+        strip_extension = strip_extension.replace(".png", "")
+        compressed_file_name = "%s%s" % (strip_extension.replace(".jpg", ""),
                                          "compressed.jpg")
         return compressed_file_name
 
